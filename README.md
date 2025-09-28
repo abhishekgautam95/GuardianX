@@ -71,11 +71,64 @@ guardianx-frontend/
 │   ├── demo/page.tsx      # Demo page with mock transactions
 │   └── layout.tsx         # App layout
 ├── components/
-│   └── GuardianPopup.tsx  # Main UI component for transaction popup
+│   ├── guardian/
+│   │   └── GuardianPopup/ # Modular popup component suite
+│   │       ├── GuardianPopup.tsx  # Main orchestrating component
+│   │       ├── RiskDial.tsx       # Circular risk visualization
+│   │       ├── VerdictBadge.tsx   # Icon + badge + explanation
+│   │       ├── TxDetails.tsx      # Transaction metadata list
+│   │       ├── Actions.tsx        # Proceed/Reject buttons
+│   │       ├── types.ts           # Domain types & interfaces
+│   │       ├── motion.ts          # Animation variants
+│   │       ├── a11y.ts            # Accessibility utilities
+│   │       └── index.ts           # Barrel exports
+│   └── guardian-popup.tsx # Deprecated (use new path above)
 ├── public/                # Static assets
 ├── styles/                # Global TailwindCSS styles
 ├── package.json
 └── tailwind.config.js
+```
+
+## Component Architecture
+
+GuardianX uses a modular component architecture for enhanced maintainability and testability:
+
+### GuardianPopup Component Suite
+
+- **Modular Design**: Each UI concern is separated into focused subcomponents
+- **Accessibility First**: Proper ARIA roles, focus management, and keyboard navigation
+- **Portal Rendering**: Uses React portals to avoid z-index conflicts
+- **Type Safety**: Comprehensive TypeScript interfaces and domain types
+- **Motion System**: Centralized animation variants with reduced-motion support
+- **Future-Proof**: Scaffolded for features like model versioning and reasoning factors
+
+### Usage
+
+```typescript
+import { GuardianPopup } from '@/components/guardian/GuardianPopup';
+
+// The component maintains the same API as before
+<GuardianPopup
+  isOpen={isOpen}
+  onClose={onClose}
+  txSummary={txSummary}
+  riskScore={riskScore}
+  verdict={verdict}
+  explanation={explanation}
+  onProceed={onProceed}
+  onReject={onReject}
+/>
+```
+
+### Migration from Legacy Component
+
+The old import path still works but is deprecated:
+```typescript
+// ❌ Deprecated - will show console warning in development
+import { GuardianPopup } from '@/components/guardian-popup';
+
+// ✅ Recommended - use the new modular path
+import { GuardianPopup } from '@/components/guardian/GuardianPopup';
 ```
 
 ---
