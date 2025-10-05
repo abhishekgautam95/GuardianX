@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { GuardianPopup } from "@/components/guardian-popup";
+import { GuardianPopup } from "@/components/guardian/GuardianPopup";
 import { mockTransactions } from "@/lib/mock-data";
 import { Shield, TestTube, AlertTriangle, CheckCircle, Zap } from "lucide-react";
 
